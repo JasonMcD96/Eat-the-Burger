@@ -1,4 +1,4 @@
-const connnection = require('./connection');
+const connection = require('./connection');
 
 let printQuestionMarks = (x) => {
     let array = [];
@@ -8,7 +8,7 @@ let printQuestionMarks = (x) => {
     return array.toString();
 }
 
-let objectToSql = (x) => {
+let objectToSql = (object) => {
     var array = [];
 
     for (var key in object) {
@@ -20,8 +20,6 @@ let objectToSql = (x) => {
             array.push(key + "=" + val)
         }
     }
-
-
     return array.toString();
 }
 
@@ -29,7 +27,7 @@ let objectToSql = (x) => {
 var ORM = {
     selectAll: function (tableInput, callback) {
         let query = "select * from " + tableInput + ";"
-        connnection.query(query, function (err, res) {
+        connection.query(query, function (err, res) {
             if (err) { throw err }
             callback(res)
         })
@@ -43,8 +41,6 @@ var ORM = {
         query += "values (";
         query += printQuestionMarks(values.length);
         query += ") ";
-
-        console.log(query);
 
         connection.query(query, values, function (err, result) {
             if (err) {
@@ -63,7 +59,6 @@ var ORM = {
         query += " where ";
         query += condition;
 
-        console.log(query);
         connection.query(query, function (err, result) {
             if (err) {
                 throw err;
