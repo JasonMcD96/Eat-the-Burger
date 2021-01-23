@@ -1,0 +1,1 @@
+insert into burgers (burger_name, devoured) values ('Mushroom Swiss', false), ('Monster Burger', false), ('Impossible Burger', false)
