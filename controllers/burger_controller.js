@@ -1,0 +1,39 @@
+const express = require("express");
+let router = express.Router();
+let burger = require('../models/burger')
+
+router.get('/', function(req, res){
+    burger.all(function(data){
+        let handlebarObject = {
+            burgers: data
+        };
+        console.log(handlebarObject)
+        res.render('index', handlebarObject);
+    })
+});
+
+router.post("/api/burgers", function(req, res){
+    burger.insert([
+        "burger_name", "devoured"
+    ],[
+        req.body.burger_name, req.body.devoured   
+    ], function(result){
+        res.json({id: result.insertId})
+    });
+});
+
+router.put("api/burgers/:id", function(req, res){
+    let cond = "id = " + req.params.id;
+
+    burger.update({
+        devoured: req.body.devoured
+    }, cond, function(result){
+        if(result.changedRows == 0) {
+            return res.status(404).end();
+        } else {
+            res.status(200).end();
+        }
+    })
+});
+
+module.exports = router
