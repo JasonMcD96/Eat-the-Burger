@@ -1,4 +1,4 @@
-const connnection = require('../config/connection');
+const connnection = require('./connection');
 
 let printQuestionMarks = (x) => {
     let array = [];
