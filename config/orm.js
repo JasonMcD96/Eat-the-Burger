@@ -25,6 +25,7 @@ let objectToSql = (x) => {
     return array.toString();
 }
 
+
 var ORM = {
     selectAll: function (tableInput, callback) {
         let query = "select * from " + tableInput + ";"
