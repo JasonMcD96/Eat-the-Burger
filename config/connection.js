@@ -8,11 +8,18 @@ let connection = mysql.createConnection({
     database: 'burgers_db'
 });
 
-connection.connect(function(err){
-    if(err){
-        console.error('Error connecting to database')
-    }
-    console.log('Connected as ID ' + connection.threadId)
-});
+if (process.env.JAWSDB_URL) {
+    connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+    connection.connect(function (err) {
+        if (err) {
+            console.error('Error connecting to database')
+        }
+        console.log('Connected as ID ' + connection.threadId)
+    });
+
+}
+
+
 
 module.exports = connection;
