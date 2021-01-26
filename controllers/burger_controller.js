@@ -7,7 +7,7 @@ router.get('/', function(req, res){
         let handlebarObject = {
             burgers: data
         };
-        console.log(handlebarObject)
+        // console.log(handlebarObject)
         res.render('index', handlebarObject);
     })
 });
@@ -22,7 +22,8 @@ router.post("/api/burgers", function(req, res){
     });
 });
 
-router.put("api/burgers/:id", function(req, res){
+router.put("/api/burgers/:id", function(req, res){
+    console.log('Put request')
     let cond = "id = " + req.params.id;
 
     burger.update({
