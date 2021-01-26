@@ -10,6 +10,7 @@ let burger = {
         });
     },
     insert: function(columns, values, callback){
+        console.log("Trying to insert a burger")
         orm.insertOne('burgers', columns, values, function(res){
             callback(res);
         });
